@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<meta charset = "utf-8">
+<style> #box { width: 1em; } </style>
+<style>
+body {
+      background: linear-gradient(to top right, #ff9966 0%, #6699ff 100%);
+     }
+</style>
+<style> span {   background-color: #B33A3A } </style>
+<style> span {   color: white} </style>
+<style>
+form { border : 2px solid #0850BF ;
+       width:40%                  ; 
+       margin: auto               ;
+       overflow: hidden           ;
+       padding: 10px              ;
+       border-radius: 10px        ;           
+    }
+</style>
+<h2><center> Welcome to Highlander Bank Account <img src ="logo.png" alt="njitlogo" width=150 heigth=150></center></h2>
+
+
+<!--Form for Creating a New Account-->
+<form action = "insert-user-in-AA.php"      onsubmit = "return f1()">
+<b><center>Create a New Account</center></b><br>
+<input type = text name = "UCID" id = "UCID_1"  placeholder = "Required" required  autofocus  autocomplete = "off" > Enter UCID<br><br>
+<input type = password name = "pass" id = "pass_1" placeholder = "Required" required  autocomplete = "off" > Enter New Password
+<span id = "warn"></span><br><br>
+<input type = password name = "pass_again" id = "pass_again" placeholder = "Required" required  autocomplete = "off" > Please Confirm Password
+<span id = "warning"></span><br><br>
+<input type = text name = "name" id = "name" placeholder = "Required" required  autocomplete = "off" > Enter Name<br><br>
+<input type = text name = "mail" id = "mail" placeholder = "Required" required  autocomplete = "off" > Enter E-mail<br><br>
+<input type = text name = "initial" id = "initial" placeholder = "Required" required  autocomplete = "off" > Enter Initial Amount<br><br>
+<input type = text name = "mailchoice" value="N" id = "box"> 
+Mail receipt: N for No. Y for Yes<br><br>
+<input type = submit >
+</form><br><br>
+
+
+<!--Form for Deposit or Withdraw-->
+<form action = "deposit-or-withdraw.php"    onsubmit = "return f2()">
+<b><center>Perform Transaction</center></b><br>
+<input type = text name = "UCID" id = "UCID_2" placeholder = "Required"  autocomplete = "off" > Enter UCID
+<span id = "warning1"></span><br><br>
+<input type = password name = "pass" id = "pass_2" placeholder = "Required"  autocomplete = "off" > Enter Password
+<span id = "warning2"></span><br><br>
+<input type = text name = "amount" id = "amount" placeholder = "0.00" required autocomplete = "off" > Enter Amount<br><br>
+
+<!-- Retrieve nothing, Show, Deposit, and Withdraw-->
+Service <select name="type" id="type" required>
+        <option value="select"> Choose one</option>
+        <option value="D"> Deposit</option>
+        <option value="W"> Withdraw</option>
+</select><br><br>
+<input type = text name= "mail" value="N" id = "box"> 
+Mail receipt: N for No. Y for Yes<br><br>
+<input type = submit >
+</form><br><br>
+
+
+<!--Form for Displaying Transcactions-->
+<form action = "display.php"               onsubmit = "return f3()">
+<b><center>Display Transactions</center></b><br>
+<input type = text name = "UCID" id = "UCID_3" placeholder = "Required"  autocomplete = "off" > Enter UCID
+<span id = "warning3"></span><br><br>
+<input type = password name = "pass" id = "pass_3" placeholder = "Required"  autocomplete = "off" > Enter Pass
+<span id = "warning4"></span><br><br>
+<input type = number name = "number" id = "number" placeholder = "Number" required autocomplete = "off" > Number of Transactions<br><br>
+<input type = text name= "mail" value="N" id = "box">
+Mail receipt: N for No. Y for Yes<br><br>
+<input type = submit >
+</form>
+
+
+<!--blocking form if pass and pass_again are not same-->
+<script>
+function f1(){
+var a = document.getElementById ("pass_1")
+    a.addEventListener ("blur",f1)
+    var warn = document.getElementById("warn")
+
+var b = document.getElementById ("pass_again")
+    b.addEventListener ("blur" ,f1)
+    var warning = document.getElementById("warning")
+    
+    var aa = a.value
+    var bb = b.value
+    if (aa === bb){warn.innerHTML = ""} 
+    else      { warning.innerHTML = "Passwords do not match!!" }
+    if (aa === bb){return true;} 
+    else      {return false;}
+}
+</script>
+
+
+<!--blocking deposit-or-withdraw form if UCID or pass is left blank-->
+<script>
+function f2(){
+var X = document.getElementById ("UCID_2")
+    X.addEventListener("blur", f2)
+    var warning1 = document.getElementById ("warning1")
+
+var Y = document.getElementById ("pass_2")
+    Y.addEventListener("blur", f2)
+    var warning2 = document.getElementById ("warning2")
+    
+    s = X.value
+    k = Y.value
+    if (s == "") {warning1.innerHTML = "UCID is empty!!"} 
+    else         { warning1.innerHTML = "" }
+    if (k == "") {warning2.innerHTML = "Password is empty!!"} 
+    else         { warning2.innerHTML = "" }
+    if ((s.trim()=== "") || ( k.trim()=== "")) {return false;} else {return true;}
+}
+</script>
+
+
+<!--blocking Display Transaction form if UCID or pass is left blank-->
+<script>
+function f3(){
+var v = document.getElementById ("UCID_3")
+    v.addEventListener("blur", f3)
+    var warning3 = document.getElementById ("warning3")
+
+var w = document.getElementById ("pass_3")
+    w.addEventListener("blur", f3)
+    var warning4 = document.getElementById ("warning4")
+    
+    t = v.value
+    f = w.value
+    if (t == "") {warning3.innerHTML = "UCID is empty!!"} 
+    else         { warning3.innerHTML = "" }
+    if (f == "") {warning4.innerHTML = "Password is empty!!"} 
+    else         { warning4.innerHTML = "" }
+    if ((t.trim()=== "") || ( f.trim()=== "")) {return false;} else {return true;}
+}
+</script>
+</html>
